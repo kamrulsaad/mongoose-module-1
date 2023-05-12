@@ -5,6 +5,8 @@ export const createUserToDB = async (data: IUser): Promise<IUser> => {
   const user = new User(data);
   user.save();
 
+  console.log(user.fullName());
+
   return user;
 };
 
@@ -14,9 +16,17 @@ export const getUsersFromDB = async (): Promise<IUser[]> => {
 };
 
 export const getUserByIdFromDB = async (id: string): Promise<IUser | null> => {
-  const user = await User.findOne({ id }, {
-    name: 1,
-    contactNo: 1,
-  });
+  const user = await User.findOne(
+    { id },
+    {
+      name: 1,
+      contactNo: 1,
+    }
+  );
   return user;
+};
+
+export const getAllAdminUsersService = async () => {
+  const admins = await User.getAdminUsers();
+  return admins;
 };

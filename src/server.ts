@@ -1,13 +1,9 @@
 import mongoose from "mongoose";
-import express from "express";
-import cors from "cors";
-const app = express();
+import app from "./app";
 const port : number = 5000;
 
-app.use(cors());
 
 //database connection
-
 async function connect() {
   try {
     await mongoose.connect("mongodb://localhost:27017/module-1");
@@ -23,6 +19,3 @@ async function connect() {
 
 connect();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
